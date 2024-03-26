@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Core.CQRS.Product.Queries
 {
-    public record GetProductsQuery() : IRequest<IReadOnlyList<ProductDto>>;
+    public record GetProductQuery(int Id) : IRequest<ProductDto>;
 }

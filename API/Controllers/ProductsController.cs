@@ -1,20 +1,49 @@
-﻿using Core.CQRS.Product.Queries;
+﻿using API.Errors;
+using Core.CQRS.Product.Queries;
+using Core.CQRS.ProductBrand.Queries;
+using Core.CQRS.ProductType.Queries;
 using Entities;
+using Entities.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController(IMediator mediator) : ControllerBase
+    public class ProductsController(IMediator mediator) : BaseApiController
     {
         private readonly IMediator _mediator = mediator;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts()
         {
             return Ok(await _mediator.Send(new GetProductsQuery()));
+        }
+        
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
+        {
+            var product = await _mediator.Send(new GetProductQuery(id));
+            
+            if (product == null)
+            {
+                return NotFound(new ApiResponse(404));
+            }
+            
+            return Ok(product);
+        }
+
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+        {
+            return Ok(await _mediator.Send(new GetProductBrandsQuery()));
+        }
+        
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+        {
+            return Ok(await _mediator.Send(new GetProductTypesQuery()));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Data;
+using Entities;
 
 namespace Core.Repositories
 {
@@ -6,32 +7,32 @@ namespace Core.Repositories
     {
         private readonly DataContext _dataContext = dataContext;
 
-        public IQueryable<TEntity> GetQueryable<TEntity>() where TEntity : class
+        public IQueryable<TEntity> GetQueryable<TEntity>() where TEntity : BaseEntity
         {
             return _dataContext.Set<TEntity>();
         }
 
-        public async Task AddAsync<TEntity>(TEntity entity) where TEntity : class
+        public async Task AddAsync<TEntity>(TEntity entity) where TEntity : BaseEntity
         {
             await _dataContext.Set<TEntity>().AddAsync(entity);
         }
 
-        public async Task AddRangeAsync<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        public async Task AddRangeAsync<TEntity>(IEnumerable<TEntity> entities) where TEntity : BaseEntity
         {
             await _dataContext.Set<TEntity>().AddRangeAsync(entities);
         }
 
-        public void Delete<TEntity>(TEntity entity) where TEntity : class
+        public void Delete<TEntity>(TEntity entity) where TEntity : BaseEntity
         {
             _dataContext.Set<TEntity>().Remove(entity);
         }
 
-        public void DeleteRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        public void DeleteRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : BaseEntity
         {
             _dataContext.Set<TEntity>().RemoveRange(entities);
         }
 
-        public void DeleteRange<TEntity>(Func<TEntity, bool> predicate) where TEntity : class
+        public void DeleteRange<TEntity>(Func<TEntity, bool> predicate) where TEntity : BaseEntity
         {
             _dataContext.Set<TEntity>().RemoveRange(_dataContext.Set<TEntity>().Where(predicate));
         }
