@@ -2,6 +2,7 @@
 using Core.CQRS.Product.Queries;
 using Core.CQRS.ProductBrand.Queries;
 using Core.CQRS.ProductType.Queries;
+using Core.Helpers;
 using Entities;
 using Entities.DTOs;
 using MediatR;
@@ -14,9 +15,12 @@ namespace API.Controllers
         private readonly IMediator _mediator = mediator;
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts([FromQuery] ProductQueryParams queryParams)
         {
-            return Ok(await _mediator.Send(new GetProductsQuery()));
+            var totalItems = await _mediator.Send(new GetProductsCountQuery(queryParams));
+            var data = await _mediator.Send(new GetProductsQuery(queryParams));
+
+            return Ok(new Pagination<ProductDto>(queryParams.PageNumber, queryParams.PageSize, totalItems, data));
         }
         
         [HttpGet("{id}")]

@@ -10,6 +10,8 @@ namespace Core.Repositories
         
         Task AddRangeAsync<TEntity>(IEnumerable<TEntity> entities) where TEntity : BaseEntity;
 
+        void Update<TEntity>(TEntity entity) where TEntity : BaseEntity;
+        
         void Delete<TEntity>(TEntity entity) where TEntity : BaseEntity;
 
         void DeleteRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : BaseEntity;
