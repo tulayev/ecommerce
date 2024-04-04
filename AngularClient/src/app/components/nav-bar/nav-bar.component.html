@@ -1,26 +1,36 @@
 <header class="d-flex flex-row align-items-center justify-content-between p-3 px-4 mb-3 bg-white border-bottom fixed-top shadow-sm">
-    <img 
-        src="/assets/images/logo.svg" 
-        alt="logo" 
-        style="max-height: 70px;"
-    />
+    <a
+        routerLink="/"
+    >
+        <img 
+            src="/assets/images/logo.svg" 
+            alt="logo" 
+            style="max-height: 70px;"
+        />
+    </a>
+
     
     <nav class="my-2 text-uppercase fs-4">
         <a 
-            href="#"
-            class="p-2 text-dark text-decoration-none"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="p-2"
         >
             Home
         </a>
         <a 
-            href="#"
-            class="p-2 text-dark text-decoration-none"
+            routerLink="/shop"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="p-2"
         >
             Shop
         </a>
         <a 
-            href="#"
-            class="p-2 text-dark text-decoration-none"
+            routerLink="/contact"
+            routerLinkActive="active"
+            class="p-2"
         >
             Contact
         </a>

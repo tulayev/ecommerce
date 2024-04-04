@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarModule } from './components';
-import { ShopModule } from './pages/shop/shop.module';
 
 @NgModule({
     declarations: [
@@ -17,8 +16,7 @@ import { ShopModule } from './pages/shop/shop.module';
         AppRoutingModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        NavBarModule,
-        ShopModule
+        NavBarModule
     ],
     providers: [],
     bootstrap: [AppComponent]
