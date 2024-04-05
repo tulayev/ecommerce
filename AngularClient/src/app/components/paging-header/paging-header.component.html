@@ -4,20 +4,19 @@
     <span 
         *ngIf="totalCount > 0"
     >
-        Showing 
+        Показаны
         <strong>
             {{ (pageNumber - 1) * pageSize + 1 }} - {{ (pageNumber * pageSize > totalCount) ? totalCount : pageNumber * pageSize }}
         </strong> 
-        of 
+        результатов из
         <strong>
             {{ totalCount }}
-        </strong> 
-        Results
+        </strong>  
     </span>
     
     <span 
         *ngIf="totalCount === 0"
     >
-        There are <strong>0</strong> results for this filter
+        Для данного фильтра найдены<strong>0 </strong> результатов. 
     </span>
 </header>

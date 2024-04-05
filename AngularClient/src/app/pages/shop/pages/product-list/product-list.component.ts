@@ -17,9 +17,9 @@ export class ProductListComponent {
     shopQueryParams = new ShopQueryParams();
 
     sortOptions = [
-      { name: 'Alphabetical', value: 'name' },
-      { name: 'Price: Low to high', value: 'priceAsc' },
-      { name: 'Price: High to low', value: 'priceDesc' },
+      { name: 'По алфавиту', value: 'name' },
+      { name: 'Цена: по возрастанию', value: 'priceAsc' },
+      { name: 'Цена: по убыванию ', value: 'priceDesc' },
     ];
 
     totalCount = 0;
@@ -43,13 +43,13 @@ export class ProductListComponent {
   
     getProductBrands() {
         this.shopService.getProductBrands().subscribe(response => 
-            this.productBrands = [{ id: 0, name: 'All' }, ...response]
+            this.productBrands = [{ id: 0, name: 'Все' }, ...response]
         );
     }
   
     getProductTypes() {
         this.shopService.getProductTypes().subscribe(response =>
-            this.productTypes = [{ id: 0, name: 'All' }, ...response]
+            this.productTypes = [{ id: 0, name: 'Все' }, ...response]
         );
     }
   

@@ -1,146 +1,82 @@
 [
   {
-    "Name": "Angular Speedster Board 2000",
+    "Name": "Samsung S7 S27A700NWM 27' 60Hz IPS (Flat)",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 200,
-    "PictureUrl": "images/products/sb-ang1.png",
-    "ProductTypeId": 1,
-    "ProductBrandId": 1
-  },
-  {
-    "Name": "Green Angular Board 3000",
-    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
-    "Price": 150,
-    "PictureUrl": "images/products/sb-ang2.png",
-    "ProductTypeId": 1,
-    "ProductBrandId": 1
-  },
-  {
-    "Name": "Core Board Speed Rush 3",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 180,
-    "PictureUrl": "images/products/sb-core1.png",
-    "ProductTypeId": 1,
-    "ProductBrandId": 2
-  },
-  {
-    "Name": "Net Core Super Board",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 300,
-    "PictureUrl": "images/products/sb-core2.png",
-    "ProductTypeId": 1,
-    "ProductBrandId": 2
-  },
-  {
-    "Name": "React Board Super Whizzy Fast",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 250,
-    "PictureUrl": "images/products/sb-react1.png",
-    "ProductTypeId": 1,
-    "ProductBrandId": 4
-  },
-  {
-    "Name": "Typescript Entry Board",
-    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
-    "Price": 120,
-    "PictureUrl": "images/products/sb-ts1.png",
+    "Price": 320,
+    "PictureUrl": "images/products/monitor_samsung_1.jpg",
     "ProductTypeId": 1,
     "ProductBrandId": 5
   },
   {
-    "Name": "Core Blue Hat",
-    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 10,
-    "PictureUrl": "images/products/hat-core1.png",
-    "ProductTypeId": 2,
-    "ProductBrandId": 2
-  },
-  {
-    "Name": "Green React Woolen Hat",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 8,
-    "PictureUrl": "images/products/hat-react1.png",
-    "ProductTypeId": 2,
-    "ProductBrandId": 4
-  },
-  {
-    "Name": "Purple React Woolen Hat",
-    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 15,
-    "PictureUrl": "images/products/hat-react2.png",
-    "ProductTypeId": 2,
-    "ProductBrandId": 4
-  },
-  {
-    "Name": "Blue Code Gloves",
+    "Name": "Samsung Odyssey G5 S32AG504PM 32' 165Hz IPS (Flat)",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
-    "Price": 18,
-    "PictureUrl": "images/products/glove-code1.png",
-    "ProductTypeId": 4,
-    "ProductBrandId": 3
+    "Price": 470,
+    "PictureUrl": "images/products/monitor_samsung_2.jpg",
+    "ProductTypeId": 1,
+    "ProductBrandId": 5
   },
   {
-    "Name": "Green Code Gloves",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 15,
-    "PictureUrl": "images/products/glove-code2.png",
-    "ProductTypeId": 4,
-    "ProductBrandId": 3
-  },
-  {
-    "Name": "Purple React Gloves",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
-    "Price": 16,
-    "PictureUrl": "images/products/glove-react1.png",
-    "ProductTypeId": 4,
-    "ProductBrandId": 4
-  },
-  {
-    "Name": "Green React Gloves",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 14,
-    "PictureUrl": "images/products/glove-react2.png",
-    "ProductTypeId": 4,
-    "ProductBrandId": 4
-  },
-  {
-    "Name": "Redis Red Boots",
+    "Name": "Samsung Odyssey G6 S27BG650EM 27' 240Hz VA (Curved)",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 250,
-    "PictureUrl": "images/products/boot-redis1.png",
+    "Price": 610,
+    "PictureUrl": "images/products/monitor_samsung_3.jpg",
+    "ProductTypeId": 1,
+    "ProductBrandId": 5
+  },
+  {
+    "Name": "AOC 27G2SPU 27' 165Hz IPS (Flat)",
+    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
+    "Price": 265,
+    "PictureUrl": "images/products/monitor_aoc_1.jpg",
+    "ProductTypeId": 1,
+    "ProductBrandId": 4
+  },
+  {
+    "Name": "Kingston FURY Beast DDR4 RGB 3600MHz (1 x 16GB)",
+    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+    "Price": 47,
+    "PictureUrl": "images/products/ram_kingston_1.jpg",
+    "ProductTypeId": 2,
+    "ProductBrandId": 1
+  },
+  {
+    "Name": "Corsair VENGEANCE DDR5 RGB 6000MHz (2 x 32GB)",
+    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
+    "Price": 225,
+    "PictureUrl": "images/products/ram_corsair_1.jpg",
+    "ProductTypeId": 2,
+    "ProductBrandId": 3
+  },
+  {
+    "Name": "Zalman Watttera 1000W",
+    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+    "Price": 180,
+    "PictureUrl": "images/products/psu_zalman_1.jpg",
     "ProductTypeId": 3,
     "ProductBrandId": 6
   },
   {
-    "Name": "Core Red Boots",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 189.99,
-    "PictureUrl": "images/products/boot-core2.png",
-    "ProductTypeId": 3,
-    "ProductBrandId": 2
-  },
-  {
-    "Name": "Core Purple Boots",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 199.99,
-    "PictureUrl": "images/products/boot-core1.png",
-    "ProductTypeId": 3,
-    "ProductBrandId": 2
-  },
-  {
-    "Name": "Angular Purple Boots",
-    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
-    "Price": 150,
-    "PictureUrl": "images/products/boot-ang2.png",
-    "ProductTypeId": 3,
-    "ProductBrandId": 1
-  },
-  {
-    "Name": "Angular Blue Boots",
+    "Name": "Zalman Watttera 1200W",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 180,
-    "PictureUrl": "images/products/boot-ang1.png",
+    "Price": 200,
+    "PictureUrl": "images/products/psu_zalman_2.jpg",
     "ProductTypeId": 3,
+    "ProductBrandId": 6
+  },
+  {
+    "Name": "Samsung 870 EVO 250GB 2.5' sata",
+    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+    "Price": 40,
+    "PictureUrl": "images/products/ssd_samsung_1.jpg",
+    "ProductTypeId": 4,
+    "ProductBrandId": 5
+  },
+  {
+    "Name": "Kingston SXS1000 1TB",
+    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
+    "Price": 80,
+    "PictureUrl": "images/products/ssd_kingston_1.jpg",
+    "ProductTypeId": 4,
     "ProductBrandId": 1
   }
 ]

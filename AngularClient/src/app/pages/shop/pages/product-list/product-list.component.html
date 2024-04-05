@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <section class="col-3">
-            <h5 class="text-warning ms-3">Sort</h5>
+            <h5 class="text-warning ms-3">Сортировка</h5>
             <select 
                 (change)="onSortSelected($event)"
                 class="form-select mb-4" 
@@ -14,7 +14,7 @@
                 </option>
             </select>
 
-            <h5 class="text-warning ms-3">Brands</h5>
+            <h5 class="text-warning ms-3">Бренды</h5>
             <ul class="brand-list list-group my-3">
                 <li 
                     *ngFor="let brand of productBrands"
@@ -26,7 +26,7 @@
                     {{ brand.name }}
                 </li>
             </ul>
-            <h5 class="text-warning ms-3">Types</h5>
+            <h5 class="text-warning ms-3">Виды</h5>
             <ul class="type-list list-group my-3">
                 <li 
                     *ngFor="let type of productTypes"
@@ -52,20 +52,20 @@
                         #search
                         (keyup.enter)="onSearch()" 
                         type="text" 
-                        placeholder="Search" 
+                        placeholder="Поиск..." 
                         class="form-control me-2" 
                     />
                     <button 
                         (click)="onSearch()" 
                         class="btn btn-outline-primary mx-2"
                     >
-                        Search
+                        Искать
                     </button>
                     <button 
                         (click)="onReset()" 
                         class="btn btn-outline-success"
                     >
-                        Reset
+                        Отмена
                     </button>
                 </div>
             </div>

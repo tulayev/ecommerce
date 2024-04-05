@@ -1,18 +1,18 @@
 [
   {
     "Id": 1,
-    "Name": "Boards"
+    "Name": "Мониторы"
   },
   {
     "Id": 2,
-    "Name": "Hats"
+    "Name": "ОЗУ"
   },
   {
     "Id": 3,
-    "Name": "Boots"
+    "Name": "Блоки питания"
   },
   {
     "Id": 4,
-    "Name": "Gloves"
+    "Name": "Накопители"
   }
 ]
