@@ -9,7 +9,8 @@ const routes: Routes = [
         children: [
             {
                 path: ':id',
-                loadChildren: () => import('./pages/product-details/product-details.module').then(m => m.ProductDetailsModule)
+                loadChildren: () => import('./pages/product-details/product-details.module').then(m => m.ProductDetailsModule),
+                data: { breadcrumb: {alias: 'productDetails'} }
             },
             {
                 path: '',

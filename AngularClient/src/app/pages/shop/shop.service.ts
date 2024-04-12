@@ -1,10 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pagination, Product, ProductBrand, ProductType, ShopQueryParams } from '@app/models';
+import { environment } from '@src/environments/environment';
 
 @Injectable()
 export class ShopService {
-    baseUrl = 'http://localhost:5000/api'
+    baseUrl = environment.apiUrl;
 
     constructor(private readonly httpClient: HttpClient) { }
 

@@ -14,7 +14,7 @@ const routes: Routes = [
                 loadChildren: () => import('./pages/shop/shop.module').then(m => m.ShopModule)
             },
             {
-                path: '404-not-found',
+                path: 'not-found',
                 loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)
             }
         ]
@@ -22,7 +22,7 @@ const routes: Routes = [
     {
         path: '**',
         pathMatch: 'full',
-        redirectTo: '404-not-found'
+        redirectTo: 'not-found'
     }
 ];
 
