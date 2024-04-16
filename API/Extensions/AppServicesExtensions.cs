@@ -12,8 +12,6 @@ namespace API.Extensions
     {
         public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));

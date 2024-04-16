@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Data
 {
-    public class DataContext(DbContextOptions options) : DbContext(options)
+    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }

@@ -10,23 +10,38 @@
         />
     </div>
     <div class="col-6 mt-5">
-        <h2>
-            {{ product.name }}
-        </h2>
-        <p style="font-size: 2em;">
-            {{ product.price | currency }}
-        </p>
+        <h2>{{ product.name }}</h2>
+        <p class="price_text">{{ product.price | currency }}</p>
+        <h5 
+            *ngIf="quantityInCart > 0"
+            class="text-primary mb-3" 
+        >
+            В вашей корзине {{ quantityInCart }} штук данного продукта
+        </h5>
+
         <div class="d-flex justify-content-start align-items-center">
-            <i class="fa fa-minus-circle text-warning me-2" style="cursor: pointer; font-size: 2em;"></i>
-            <span class="font-weight-bold" style="font-size: 1.5em;">2</span>
-            <i class="fa fa-plus-circle text-warning ms-2" style="cursor: pointer; font-size: 2em;"></i>
-            <button class="btn btn-outline-secondary ms-4">Добавить в корзину</button>
+            <i 
+                (click)="decrementQuantity()"
+                class="fa fa-minus-circle text-warning me-2" 
+            ></i>
+            <span class="font-weight-bold qty_text">
+                {{ quantity }}
+            </span>
+            <i 
+                (click)="incrementQuantity()"
+                class="fa fa-plus-circle text-warning ms-2" 
+            ></i>
+            <button 
+                (click)="updateBasket()"
+                [disabled]="quantity === quantityInCart"
+                class="btn btn-outline-primary ms-4"
+            >
+                {{ buttonText }}
+            </button>
         </div>
         <div class="row mt-4">
             <h4>Описание</h4>
-            <p>
-                {{ product.description }}
-            </p>
+            <p>{{ product.description }}</p>
         </div>
     </div>
 </div>
