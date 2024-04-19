@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-3">
+        <form 
+            [formGroup]="registerForm" 
+            (ngSubmit)="onSubmit()"
+        >
+            <div class="text-center mb-4">
+                <h1 class="mb-3">Sign up</h1>
+            </div>
+
+            <app-input 
+                [formControl]="registerForm.controls['displayName']" 
+                [label]="'Display Name'"
+            ></app-input>
+            <app-input 
+                [formControl]="registerForm.controls['email']" 
+                [label]="'Email Address'"
+            ></app-input>
+            <app-input 
+                [formControl]="registerForm.controls['password']" 
+                [label]="'Password'" 
+                [type]="'password'"
+            ></app-input>
+
+            <ul class="text-danger list-unstyled" *ngIf="errors">
+                <li *ngFor="let error of errors">
+                    {{error}}
+                </li>
+            </ul>
+
+            <div class="d-grid">
+                <button 
+                    [disabled]="registerForm.invalid" 
+                    class="btn btn-lg btn-primary mt-3" 
+                    type="submit"
+                >
+                    Зарегистрироваться
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>

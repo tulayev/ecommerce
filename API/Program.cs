@@ -14,6 +14,7 @@ var app = builder.Build();
 
 // Migrate databases
 await app.MigrateDatabaseAsync();
+
 await app.MigrateIdentityDatabaseAsync();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +30,8 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseCors("CorsPolicy");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

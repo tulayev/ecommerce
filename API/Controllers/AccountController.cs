@@ -17,12 +17,6 @@ namespace API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("emailexists")]
-        public async Task<ActionResult<bool>> CheckEmailExists([FromQuery] string email)
-        {
-            return await _mediator.Send(new CheckEmailExistsQuery(email));
-        }
-
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
@@ -30,6 +24,12 @@ namespace API.Controllers
             var user = await _mediator.Send(new GetAuthorizedUserQuery(User));
 
             return user;
+        }
+
+        [HttpGet("emailexists")]
+        public async Task<ActionResult<bool>> CheckEmailExists([FromQuery] string email)
+        {
+            return await _mediator.Send(new CheckEmailExistsQuery(email));
         }
 
         [HttpPost("login")]

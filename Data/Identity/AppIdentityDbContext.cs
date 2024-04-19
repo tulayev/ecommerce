@@ -4,8 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Identity
 {
-    public class AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : IdentityDbContext<AppUser>(options)
+    public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -1,6 +1,7 @@
 ﻿using API.Errors;
 using Core.CQRS.Product.Handlers;
 using Core.Repositories;
+using Core.Services;
 using Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace API.Extensions
                 var options = ConfigurationOptions.Parse(config.GetConnectionString("Redis"));
                 return ConnectionMultiplexer.Connect(options);
             });
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(GetProductsHandler).Assembly));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
