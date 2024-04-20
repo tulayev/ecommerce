@@ -5,7 +5,7 @@ namespace Data
 {
     public class DataContextSeed
     {
-        private const string SeedDataBasePath = "../Data/SeedData";
+        private const string SeedDataBasePath = "./Data/SeedData";
 
         public static async Task SeedAsync(DataContext context)
         {

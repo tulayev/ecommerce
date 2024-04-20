@@ -1,23 +1,104 @@
+# docker-compose.yml
+version: '3.8'
+
 services:
+  api:
+    container_name: nok.api
+    build:
+      context: .
+      dockerfile: dockerfiles/dotnet.dockerfile
+    image: dotnet
+    ports:
+      - 5000:80
+    depends_on:
+      - db
+      - identity.db
+      - redis
+
+  db:
+    image: postgres:15
+    container_name: nok.db
+    environment:
+      POSTGRES_DB: nok
+      POSTGRES_PASSWORD: nok
+      POSTGRES_USER: nok
+    ports:
+      - 5433:5432
+    networks:
+      - db.pgweb
+    restart: on-failure:3
+
+  db.pgweb:
+    image: sosedoff/pgweb
+    container_name: nok.db.pgweb
+    depends_on:
+      - db
+    environment:
+      PGWEB_DATABASE_URL: postgres://nok:nok@db:5432/nok?sslmode=disable
+    ports:
+      - 8085:8081
+    networks:
+      - db.pgweb
+    restart: on-failure:3
+  
+  identity.db:
+    image: postgres:15
+    container_name: nok.identity.db
+    environment:
+      POSTGRES_DB: nok.identity
+      POSTGRES_PASSWORD: nok
+      POSTGRES_USER: nok
+    ports:
+      - 5434:5432
+    networks:
+      - db.identity.pgweb
+    restart: on-failure:3
+
+  identity.db.pgweb:
+    image: sosedoff/pgweb
+    container_name: nok.identity.db.pgweb
+    depends_on:
+      - identity.db
+    environment:
+      PGWEB_DATABASE_URL: postgres://nok:nok@identity.db:5432/nok.identity?sslmode=disable
+    ports:
+      - 8086:8081
+    networks:
+      - db.identity.pgweb
+    restart: on-failure:3
 
   redis:
     image: redis:latest
+    container_name: nok.redis
+    command: redis-server
+    volumes:
+      - redis:/var/lib/redis
+      - redis-config:/usr/local/etc/redis/redis.conf
     ports:
       - 6379:6379
-    command: ["redis-server", "--appendonly", "yes"]
-    volumes:
-      - redis-data:/data
+    networks:
+      - redis-network
 
   redis-commander:
     image: rediscommander/redis-commander:latest
+    container_name: nok.redis.commander
     environment:
       - REDIS_HOSTS=local:redis:6379
       - HTTP_USER=root
-      - HTTP_PASSWORD=secret
+      - HTTP_PASSWORD=qwerty
     ports:
       - 8081:8081
+    networks:
+      - redis-network
     depends_on:
       - redis
-    
+
 volumes:
-  redis-data:
+  redis:
+  redis-config:
+
+networks:
+  redis-network:
+    driver: bridge
+  db.pgweb:
+  db.identity.pgweb:
