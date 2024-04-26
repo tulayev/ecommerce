@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NavBarModule } from './components';
-import { CoreModule, ErrorInterceptor, LoadingInterceptor } from './core';
+import { ErrorInterceptor, LoadingInterceptor } from './interceptors';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,11 @@ import { CoreModule, ErrorInterceptor, LoadingInterceptor } from './core';
         AppRoutingModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        CoreModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true
+        }),
+        NgxSpinnerModule,
         NavBarModule
     ],
     providers: [

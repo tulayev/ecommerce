@@ -1,11 +1,14 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Identity;
 using System.Text.Json;
 
 namespace Data
 {
     public class DataContextSeed
     {
-        private const string SeedDataBasePath = "./Data/SeedData";
+        private static readonly string SeedDataBasePath = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development"
+            ? "../Data/SeedData"
+            : "./Data/SeedData";
 
         public static async Task SeedAsync(DataContext context)
         {
@@ -33,6 +36,30 @@ namespace Data
             if (context.ChangeTracker.HasChanges())
             {
                 await context.SaveChangesAsync();
+            }
+        }
+
+        public static async Task SeedUsersAsync(UserManager<AppUser> userManager)
+        {
+            if (!userManager.Users.Any())
+            {
+                var user = new AppUser
+                {
+                    DisplayName = "Артём",
+                    Email = "artemka@nok.uz",
+                    UserName = "artemka@nok.uz",
+                    Address = new Address
+                    {
+                        FirstName = "Артём",
+                        LastName = "Пушков",
+                        Street = "проспект Сталина",
+                        City = "Омск",
+                        State = "Омская область",
+                        Zipcode = "644001"
+                    }
+                };
+
+                await userManager.CreateAsync(user, "Pa$$w0rd");
             }
         }
     }

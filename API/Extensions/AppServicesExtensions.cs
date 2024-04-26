@@ -2,7 +2,6 @@
 using Core.CQRS.Product.Handlers;
 using Core.Repositories;
 using Core.Services;
-using Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -13,10 +12,6 @@ namespace API.Extensions
     {
         public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlite(config.GetConnectionString("DefaultConnection"));
-            });
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
                 var options = ConfigurationOptions.Parse(config.GetConnectionString("Redis"));

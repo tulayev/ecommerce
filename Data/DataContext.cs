@@ -1,14 +1,19 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Data
 {
-    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
+    public class DataContext : IdentityDbContext<AppUser>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
+
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

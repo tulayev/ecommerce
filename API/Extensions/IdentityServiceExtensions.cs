@@ -1,4 +1,4 @@
-﻿using Data.Identity;
+﻿using Data;
 using Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -12,16 +12,15 @@ namespace API.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<AppIdentityDbContext>(opt =>
+            services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlite(config.GetConnectionString("IdentityConnection"));
+                opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             });
 
             services.AddIdentityCore<AppUser>(opt =>
             {
-                // add identity options here
             })
-            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppUser>>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from './guards';
 
 const routes: Routes = [
     {
@@ -20,6 +21,11 @@ const routes: Routes = [
             {
                 path: 'not-found',
                 loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)
+            },
+            {
+                path: 'server-error',
+                canActivate: [authGuard],
+                loadChildren: () => import('./pages/server-error/server-error.module').then(m => m.ServerErrorModule)
             },
             {
                 path: 'cart',

@@ -35,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     }
                     if (error.status === 500) {
                         this.toastr.error(error.error.message, error.status.toString());
-                        this.router.navigateByUrl('/500-server-error');
+                        this.router.navigateByUrl('/server-error');
                     }
                 }
 

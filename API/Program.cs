@@ -1,5 +1,6 @@
 using API.Extensions;
 using API.Middleware;
+using Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +14,7 @@ builder.Services.AddSwaggerDocumentation();
 var app = builder.Build();
 
 // Migrate databases
-await app.MigrateDatabaseAsync();
-
-await app.MigrateIdentityDatabaseAsync();
+await app.MigrateDatabaseAsync<DataContext>();
 
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();

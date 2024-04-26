@@ -1,4 +1,3 @@
-# docker-compose.yml
 version: '3.8'
 
 services:
@@ -12,7 +11,6 @@ services:
       - 5000:80
     depends_on:
       - db
-      - identity.db
       - redis
 
   db:
@@ -23,7 +21,7 @@ services:
       POSTGRES_PASSWORD: nok
       POSTGRES_USER: nok
     ports:
-      - 5433:5432
+      - 5432:5432
     networks:
       - db.pgweb
     restart: on-failure:3
@@ -39,32 +37,6 @@ services:
       - 8085:8081
     networks:
       - db.pgweb
-    restart: on-failure:3
-  
-  identity.db:
-    image: postgres:15
-    container_name: nok.identity.db
-    environment:
-      POSTGRES_DB: nok.identity
-      POSTGRES_PASSWORD: nok
-      POSTGRES_USER: nok
-    ports:
-      - 5434:5432
-    networks:
-      - db.identity.pgweb
-    restart: on-failure:3
-
-  identity.db.pgweb:
-    image: sosedoff/pgweb
-    container_name: nok.identity.db.pgweb
-    depends_on:
-      - identity.db
-    environment:
-      PGWEB_DATABASE_URL: postgres://nok:nok@identity.db:5432/nok.identity?sslmode=disable
-    ports:
-      - 8086:8081
-    networks:
-      - db.identity.pgweb
     restart: on-failure:3
 
   redis:
@@ -101,4 +73,3 @@ networks:
   redis-network:
     driver: bridge
   db.pgweb:
-  db.identity.pgweb:
