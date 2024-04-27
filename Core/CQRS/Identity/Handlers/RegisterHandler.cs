@@ -1,5 +1,5 @@
 ﻿using Core.CQRS.Identity.Commands;
-using Core.Services;
+using Core.Services.Token;
 using Entities;
 using Entities.DTOs;
 using MediatR;

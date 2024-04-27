@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Entities.Orders;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Json;
 
@@ -33,6 +34,13 @@ namespace Data
                 context.Products.AddRange(items);
             }
 
+            if (!context.DeliveryMethods.Any())
+            {
+                var data = File.ReadAllText($"{SeedDataBasePath}/delivery.json");
+                var items = JsonSerializer.Deserialize<List<DeliveryMethod>>(data);
+                context.DeliveryMethods.AddRange(items);
+            }
+
             if (context.ChangeTracker.HasChanges())
             {
                 await context.SaveChangesAsync();
@@ -48,7 +56,7 @@ namespace Data
                     DisplayName = "Артём",
                     Email = "artemka@nok.uz",
                     UserName = "artemka@nok.uz",
-                    Address = new Address
+                    Address = new Entities.Address
                     {
                         FirstName = "Артём",
                         LastName = "Пушков",

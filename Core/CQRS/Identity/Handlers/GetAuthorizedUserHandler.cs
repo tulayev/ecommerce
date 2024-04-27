@@ -1,6 +1,6 @@
 ﻿using Core.CQRS.Identity.Queries;
 using Core.Extensions;
-using Core.Services;
+using Core.Services.Token;
 using Entities;
 using Entities.DTOs;
 using MediatR;

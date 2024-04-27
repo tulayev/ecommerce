@@ -1,7 +1,8 @@
 ﻿using API.Errors;
 using Core.CQRS.Product.Handlers;
 using Core.Repositories;
-using Core.Services;
+using Core.Services.Order;
+using Core.Services.Token;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -17,6 +18,7 @@ namespace API.Extensions
                 var options = ConfigurationOptions.Parse(config.GetConnectionString("Redis"));
                 return ConnectionMultiplexer.Connect(options);
             });
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(GetProductsHandler).Assembly));
