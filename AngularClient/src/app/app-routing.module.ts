@@ -24,12 +24,21 @@ const routes: Routes = [
             },
             {
                 path: 'server-error',
-                canActivate: [authGuard],
                 loadChildren: () => import('./pages/server-error/server-error.module').then(m => m.ServerErrorModule)
             },
             {
                 path: 'cart',
                 loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)
+            },
+            {
+                path: 'checkout',
+                canActivate: [authGuard],
+                loadChildren: () => import('./pages/checkout/checkout.module').then(m => m.CheckoutModule)
+            },
+            {
+                path: 'orders', 
+                canActivate: [authGuard],
+                loadChildren: () => import('./pages/order/order.module').then(m => m.OrderModule)
             }
         ]
     }, 

@@ -11,11 +11,11 @@ export class CartComponent {
 
     constructor(public readonly cartService: CartService) {}
 
-    incrementQuantity(item: CartItem) {
+    incrementQuantity(item: CartItem): void {
         this.cartService.addItemToCart(item);
     }
     
-    removeItem(id: number, quantity: number) {
-        this.cartService.removeItemFromCart(id, quantity);
+    removeItem(event: {id: number, quantity: number}): void {
+        this.cartService.removeItemFromCart(event.id, event.quantity);
     }
 }

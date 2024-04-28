@@ -1,0 +1,53 @@
+<form 
+    *ngIf="checkoutFormGroup" 
+    [formGroup]="checkoutFormGroup"
+    class="mt-4" 
+>
+    <div class="d-flex justify-content-between align-items-center">
+        <h4>Адрес доставки</h4>
+        <button 
+            (click)="saveUserAddress()"
+            [disabled]="!checkoutFormGroup.get('addressFormGroup')?.valid || !checkoutFormGroup.get('addressFormGroup')?.dirty"
+            class="btn btn-outline-success mb-3"
+        >
+            Сохранить адрес
+        </button>
+    </div>
+    <div class="row" formGroupName="addressFormGroup">
+        <div class="form-group col-6">
+            <app-input [label]="'First name'" formControlName="firstName"></app-input>
+        </div>
+        <div class="form-group col-6">
+            <app-input [label]="'Last name'" formControlName="lastName"></app-input>
+        </div>
+        <div class="form-group col-6">
+            <app-input [label]="'Street'" formControlName="street"></app-input>
+        </div>
+        <div class="form-group col-6">
+            <app-input [label]="'City'" formControlName="city"></app-input>
+        </div>
+        <div class="form-group col-6">
+            <app-input [label]="'State'" formControlName="state"></app-input>
+        </div>
+        <div class="form-group col-6">
+            <app-input [label]="'Zip code'" formControlName="zipcode"></app-input>
+        </div>
+    </div>
+</form>
+
+<div class="d-flex justify-content-between flex-row mb-5">
+    <button 
+        routerLink="/cart"
+        class="btn btn-outline-primary" 
+    >
+        <i class="fa fa-angle-left"></i> 
+        Назад
+    </button>
+    <button 
+        class="btn btn-primary" 
+        cdkStepperNext
+    >
+        <i class="fa fa-angle-right"></i> 
+        Вперёд 
+    </button>
+</div>

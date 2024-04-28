@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-8">
+            <app-stepper 
+                [linearModeSelected]="false" 
+                #appStepper
+            >
+                <cdk-step 
+                    [label]="'Address'" 
+                    [completed]="checkoutFormGroup.get('addressFormGroup')?.valid"
+                >
+                    <app-checkout-address [checkoutFormGroup]="checkoutFormGroup"></app-checkout-address>
+                </cdk-step>
+                <cdk-step 
+                    [label]="'Delivery'" 
+                    [completed]="checkoutFormGroup.get('deliveryForm')?.valid"
+                >
+                    <app-checkout-delivery [checkoutFormGroup]="checkoutFormGroup"></app-checkout-delivery>
+                </cdk-step>
+                <cdk-step 
+                    [label]="'Review'"
+                >
+                    <app-checkout-review></app-checkout-review>
+                </cdk-step>
+                <cdk-step 
+                    [label]="'Payment'"
+                >
+                    <app-checkout-payment [checkoutFormGroup]="checkoutFormGroup"></app-checkout-payment>
+                </cdk-step>
+            </app-stepper>
+        </div>
+        <div class="col-4">
+            <app-order-totals></app-order-totals>
+        </div>
+    </div>
+</div>

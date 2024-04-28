@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cart, CartItem, CartTotals, Product } from '@app/models';
+import { Cart, CartItem, CartTotals, DeliveryMethod, Product } from '@app/models';
 import { environment } from '@src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +14,8 @@ export class CartService {
     
     cartSource$ = this.cartSource.asObservable();
     cartTotalSource$ = this.cartTotalSource.asObservable();
+
+    shipping = 0;
 
     constructor(private readonly httpClient: HttpClient) { }
 
@@ -49,24 +51,39 @@ export class CartService {
         }
     }
 
-    private calculateTotals() {
+    private calculateTotals(): void {
         const cart = this.getCurrentCartValue();
         
         if (!cart) 
             return;
         
-        const shipping = 0;
         const subtotal = cart.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
-        const total = subtotal + shipping;
+        const total = subtotal + this.shipping;
         
-        this.cartTotalSource.next({ shipping, total, subtotal });
+        this.cartTotalSource.next({ shipping: this.shipping, total, subtotal });
     }
 
     private isProduct(item: Product | CartItem): item is Product {
         return (item as Product).productBrand !== undefined;
     }
 
-    getCart(id: string) {
+    private deleteCart(cart: Cart): Subscription {
+        return this.httpClient.delete(`${this.baseUrl}/cart?id=${cart.id}`)
+            .subscribe(() => this.deleteLocalCart());
+    }
+
+    deleteLocalCart(): void {
+        this.cartSource.next(null);
+        this.cartTotalSource.next(null);
+        localStorage.removeItem('cart_id');
+    }
+
+    setShippingPrice(deliveryMethod: DeliveryMethod): void {
+        this.shipping = deliveryMethod.price;
+        this.calculateTotals();
+    }
+
+    getCart(id: string): Subscription {
         return this.httpClient.get<Cart>(`${this.baseUrl}/cart?id=${id}`)
             .subscribe(cart => {
                 this.cartSource.next(cart);
@@ -74,7 +91,7 @@ export class CartService {
             });
     }
     
-    setCart(cart: Cart) {
+    setCart(cart: Cart):Subscription {
         return this.httpClient.post<Cart>(`${this.baseUrl}/cart`, cart)
             .subscribe(cart => {
                 this.cartSource.next(cart);
@@ -82,11 +99,11 @@ export class CartService {
             });
     }
 
-    getCurrentCartValue() {
+    getCurrentCartValue(): Cart | null {
         return this.cartSource.value;
     }
 
-    addItemToCart(item: Product | CartItem, quantity = 1) {
+    addItemToCart(item: Product | CartItem, quantity = 1): void {
         if (this.isProduct(item)) 
             item = this.mapProductItemToCartItem(item);
 
@@ -95,7 +112,7 @@ export class CartService {
         this.setCart(cart);
     }
 
-    removeItemFromCart(id: number, quantity = 1) {
+    removeItemFromCart(id: number, quantity = 1): void {
         const cart = this.getCurrentCartValue();
         
         if (!cart) 
@@ -109,16 +126,7 @@ export class CartService {
             if (item.quantity === 0) 
                 cart.items = cart.items.filter(x => x.id !== id);
 
-            cart.items.length > 0 ? this.setCart(cart) : this.deleteBasket(cart);
+            cart.items.length > 0 ? this.setCart(cart) : this.deleteCart(cart);
         }
-    }
-
-    deleteBasket(cart: Cart) {
-        return this.httpClient.delete(`${this.baseUrl}/cart?id=${cart.id}`)
-            .subscribe(() => {
-                this.cartSource.next(null);
-                this.cartTotalSource.next(null);
-                localStorage.removeItem('cart_id');
-            });
     }
 }

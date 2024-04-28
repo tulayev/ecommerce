@@ -63,6 +63,7 @@ namespace API.Controllers
             return user;
         }
 
+        [Authorize]
         [HttpGet("address")]
         public async Task<ActionResult<AddressDto>> GetUserAddress()
         {

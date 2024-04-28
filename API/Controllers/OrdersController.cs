@@ -6,9 +6,11 @@ using Entities.DTOs.Orders;
 using Entities.DTOs;
 using Entities.Orders;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService _orderService;
@@ -27,9 +29,10 @@ namespace API.Controllers
 
             var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
 
-            var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
+            var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.CartId, address);
 
-            if (order == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
+            if (order == null) 
+                return BadRequest(new ApiResponse(400, "Problem creating order"));
 
             return Ok(order);
         }

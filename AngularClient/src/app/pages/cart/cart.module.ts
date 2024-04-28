@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './cart.component';
-import { OrderTotalsComponent } from './order-totals/order-totals.component';
+import { OrderTotalsModule } from '@app/components';
+import { CartSummaryModule } from '@app/components/cart-summary/cart-summary.module';
 
 
 @NgModule({
     declarations: [
-        CartComponent,
-        OrderTotalsComponent
+        CartComponent
     ],
     imports: [
         CommonModule,
-        CartRoutingModule
+        CartRoutingModule,
+        OrderTotalsModule,
+        CartSummaryModule
     ]
 })
 export class CartModule { }

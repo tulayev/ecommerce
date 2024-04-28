@@ -19,7 +19,7 @@ export class LoginComponent {
         private readonly router: Router, 
         private readonly activatedRoute: ActivatedRoute
     ) {
-        this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/shop'
+        this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/shop';
     }
     
     onSubmit() {

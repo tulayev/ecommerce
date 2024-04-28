@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NavBarModule } from './components';
-import { ErrorInterceptor, LoadingInterceptor } from './interceptors';
+import { ErrorInterceptor, LoadingInterceptor, TokenInterceptor } from './interceptors';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -28,7 +28,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

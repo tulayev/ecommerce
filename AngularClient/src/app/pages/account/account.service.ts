@@ -1,21 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@app/models';
+import { Address, User } from '@app/models';
 import { environment } from '@src/environments/environment';
-import { ReplaySubject, map, of, tap } from 'rxjs';
+import { Observable, ReplaySubject, map, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AccountService {
-    baseUrl = environment.apiUrl;
+    private baseUrl = environment.apiUrl;
     private currentUserSource = new ReplaySubject<User | null>(1);
     currentUser$ = this.currentUserSource.asObservable();
 
     constructor(private readonly httpClient: HttpClient, private readonly router: Router) { }
 
-    loadCurrentUser(token: string | null) {
+    loadCurrentUser(token: string | null): Observable<User | null> {
         if (token == null) {
             this.currentUserSource.next(null);
             return of(null);
@@ -25,7 +25,6 @@ export class AccountService {
         headers = headers.set('Authorization', `Bearer ${token}`);
 
         return this.httpClient.get<User>(`${this.baseUrl}/account`, { headers }).pipe(
-            tap(console.log),
             map(user => {
                 if (user) {
                     localStorage.setItem('token', user.token);
@@ -39,7 +38,7 @@ export class AccountService {
         );
     }
 
-    login(values: any) {
+    login(values: any): Observable<void> {
         return this.httpClient.post<User>(`${this.baseUrl}/account/login`, values).pipe(
             map(user => {
                 localStorage.setItem('token', user.token);
@@ -48,7 +47,7 @@ export class AccountService {
         );
     }
 
-    register(values: any) {
+    register(values: any): Observable<void> {
         return this.httpClient.post<User>(`${this.baseUrl}/account/register`, values).pipe(
             map(user => {
                 localStorage.setItem('token', user.token);
@@ -57,13 +56,21 @@ export class AccountService {
         );
     }
 
-    logout() {
+    logout(): void {
         localStorage.removeItem('token');
         this.currentUserSource.next(null);
         this.router.navigateByUrl('/');
     }
 
-    checkEmailExists(email: string) {
+    checkEmailExists(email: string): Observable<boolean> {
         return this.httpClient.get<boolean>(`${this.baseUrl}/account/emailExists?email=${email}`);
+    }
+
+    getUserAddress(): Observable<Address> {
+        return this.httpClient.get<Address>(`${this.baseUrl}/account/address`);
+    }
+    
+    updateUserAddress(address: Address): Observable<Address> {
+        return this.httpClient.put<Address>(`${this.baseUrl}/account/address`, address);
     }
 }

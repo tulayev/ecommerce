@@ -25,7 +25,7 @@ export class ProductDetailsComponent implements OnInit {
         this.getProduct();
     }
 
-    getProduct() {
+    getProduct(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
         if (id) {
             this.shopService.getProduct(Number(id)).subscribe(product => {
@@ -42,15 +42,15 @@ export class ProductDetailsComponent implements OnInit {
         }
     }
 
-    incrementQuantity() {
+    incrementQuantity(): void {
         this.quantity++;
     }
     
-    decrementQuantity() {
+    decrementQuantity(): void {
         this.quantity--;
     }
     
-    updateBasket() {
+    updateCart(): void {
         if (this.product) {
             if (this.quantity > this.quantityInCart) {
                 const itemsToAdd = this.quantity - this.quantityInCart;
@@ -66,7 +66,7 @@ export class ProductDetailsComponent implements OnInit {
         }
     }
     
-    get buttonText() {
+    get buttonText(): string {
         return this.quantityInCart === 0 ? 'Добавить в корзину' : 'Обновить корзину';
     }
 }
