@@ -20,12 +20,8 @@ namespace Core.CQRS.Product.Handlers
 
         public async Task<ProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            var product = await _unitOfWork.GetQueryable<Entities.Product>()
-                .Include(x => x.ProductBrand)
-                .Include(x => x.ProductType)
+            return await _mapper.ProjectTo<ProductDto>(_unitOfWork.GetQueryable<Entities.Product>())
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
-
-            return _mapper.Map<Entities.Product, ProductDto>(product);
         }
     }
 }

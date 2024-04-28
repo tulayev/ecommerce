@@ -12,6 +12,7 @@ services:
     depends_on:
       - db
       - redis
+      - elasticsearch
 
   db:
     image: postgres:15
@@ -65,11 +66,31 @@ services:
     depends_on:
       - redis
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+
 volumes:
   redis:
   redis-config:
+  esdata:
 
 networks:
   redis-network:
     driver: bridge
   db.pgweb:
+  esnet:

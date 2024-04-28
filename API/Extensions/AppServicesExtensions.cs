@@ -1,6 +1,7 @@
 ﻿using API.Errors;
 using Core.CQRS.Product.Handlers;
 using Core.Repositories;
+using Core.Services.ElasticSearch;
 using Core.Services.Order;
 using Core.Services.Token;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,7 @@ namespace API.Extensions
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IElasticClientService, ElasticClientService>();
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(GetProductsHandler).Assembly));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<ApiBehaviorOptions>(options =>

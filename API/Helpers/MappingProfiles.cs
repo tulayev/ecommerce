@@ -18,6 +18,9 @@ namespace API.Helpers
             CreateMap<Entities.Address, AddressDto>().ReverseMap();
 
             CreateMap<CustomerCartDto, CustomerCart>();
+            
+            CreateMap<Review, ReviewDto>()
+                .ForMember(d => d.Author, o => o.MapFrom(s => s.Author.DisplayName));
 
             CreateMap<CartItemDto, CartItem>();
 

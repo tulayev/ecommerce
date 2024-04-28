@@ -32,7 +32,7 @@ namespace API.Controllers
             var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.CartId, address);
 
             if (order == null) 
-                return BadRequest(new ApiResponse(400, "Problem creating order"));
+                return BadRequest(new ApiResponse(400, "Что-то пошло не так."));
 
             return Ok(order);
         }

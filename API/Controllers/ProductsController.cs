@@ -31,9 +31,7 @@ namespace API.Controllers
             var product = await _mediator.Send(new GetProductQuery(id));
             
             if (product == null)
-            {
                 return NotFound(new ApiResponse(404));
-            }
             
             return Ok(product);
         }
