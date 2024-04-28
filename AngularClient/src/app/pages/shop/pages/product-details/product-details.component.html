@@ -44,4 +44,9 @@
             <p>{{ product.description }}</p>
         </div>
     </div>
+
+    <app-review 
+        [reviews]="product.reviews"
+        [productId]="product.id"
+    ></app-review>
 </div>

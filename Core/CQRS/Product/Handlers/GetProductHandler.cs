@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Core.CQRS.Product.Queries;
 using Core.Repositories;
 using Entities.DTOs;
@@ -20,7 +21,8 @@ namespace Core.CQRS.Product.Handlers
 
         public async Task<ProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            return await _mapper.ProjectTo<ProductDto>(_unitOfWork.GetQueryable<Entities.Product>())
+            return await _unitOfWork.GetQueryable<Entities.Product>()
+                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
         }
     }

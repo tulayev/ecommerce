@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.CQRS.Review.Handlers
 {
-    public class CreateReviewHandler : IRequestHandler<CreateReviewCommand, bool>
+    public class CreateReviewHandler : IRequestHandler<CreateReviewCommand, ReviewDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ namespace Core.CQRS.Review.Handlers
             _userManager = userManager;
         }
 
-        private async Task<bool> ReviewAddedToElasticSearch(int productId)
+        private async Task AddReviewToElasticSearch(int productId)
         {
             var product = await _unitOfWork.GetQueryable<Entities.Product>()
                 .Include(x => x.ProductBrand)
@@ -47,11 +47,9 @@ namespace Core.CQRS.Review.Handlers
                 await _client.RemoveFromElasticIndexAsync<ElasticProductDto>(product.Id);
             
             await _client.AddToElasticIndexAsync(elasticItem);
-
-            return true;
         }
 
-        public async Task<bool> Handle(CreateReviewCommand command, CancellationToken cancellationToken)
+        public async Task<ReviewDto> Handle(CreateReviewCommand command, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindUserByClaimsPrincipleWithAddress(command.User);
             
@@ -71,10 +69,12 @@ namespace Core.CQRS.Review.Handlers
             }
             catch
             {
-                return false;
+                return null;
             }
 
-            return await ReviewAddedToElasticSearch(command.ReviewDto.ProductId);
+            await AddReviewToElasticSearch(command.ReviewDto.ProductId);
+
+            return _mapper.Map<ReviewDto>(review);
         }
     }
 }

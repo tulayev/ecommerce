@@ -2,10 +2,12 @@
 using Core.CQRS.Review.Commands;
 using Entities.DTOs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class ReviewsController : BaseApiController
     {
         private readonly IMediator _mediator;
@@ -16,14 +18,14 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostReview(ReviewDto reviewDto)
+        public async Task<ActionResult<ReviewDto>> PostReview(ReviewDto reviewDto)
         {
-            var result = await _mediator.Send(new CreateReviewCommand(reviewDto, User));
+            var review = await _mediator.Send(new CreateReviewCommand(reviewDto, User));
 
-            if (!result)
+            if (review is null)
                 return BadRequest(new ApiResponse(400, "Что-то пошло не так."));
 
-            return Ok();
+            return Ok(review);
         }
     }
 }

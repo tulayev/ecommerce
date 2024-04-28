@@ -16,9 +16,7 @@ namespace API.Helpers
         public string Resolve(Product source, ProductDto destination, string destMember, ResolutionContext context)
         {
             if (!string.IsNullOrWhiteSpace(source.PictureUrl))
-            {
                 return $"{_configuration["ApiBaseUrl"]}/{source.PictureUrl}";
-            }
 
             return null;
         }

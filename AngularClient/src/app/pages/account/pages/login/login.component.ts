@@ -22,7 +22,7 @@ export class LoginComponent {
         this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/shop';
     }
     
-    onSubmit() {
+    onSubmit(): void {
         this.accountService.login(this.loginForm.value)
             .subscribe(() => this.router.navigateByUrl(this.returnUrl));
     }

@@ -6,6 +6,7 @@ import { PagingHeaderModule } from './paging-header/paging-header.module';
 import { OrderTotalsModule } from './order-totals/order-totals.module';
 import { StepperModule } from './stepper/stepper.module';
 import { CartSummaryModule } from './cart-summary/cart-summary.module';
+import { ReviewModule } from './review/review.module';
 
 
 
@@ -18,7 +19,8 @@ import { CartSummaryModule } from './cart-summary/cart-summary.module';
         PagingHeaderModule,
         OrderTotalsModule,
         StepperModule,
-        CartSummaryModule
+        CartSummaryModule,
+        ReviewModule
     ], 
     exports: [
         NavBarModule,
@@ -26,7 +28,8 @@ import { CartSummaryModule } from './cart-summary/cart-summary.module';
         PagingHeaderModule,
         OrderTotalsModule,
         StepperModule,
-        CartSummaryModule
+        CartSummaryModule,
+        ReviewModule
     ]
 })
 export class ComponentsModule { }

@@ -1,3 +1,5 @@
+import { Review } from "../review";
+
 export interface Product {
     id: number;
     name: string;
@@ -6,4 +8,5 @@ export interface Product {
     pictureUrl: string;
     productType: string;
     productBrand: string;
+    reviews: Review[];
 }

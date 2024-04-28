@@ -4,5 +4,5 @@ using System.Security.Claims;
 
 namespace Core.CQRS.Review.Commands
 {
-    public record CreateReviewCommand(ReviewDto ReviewDto, ClaimsPrincipal User) : IRequest<bool>;
+    public record CreateReviewCommand(ReviewDto ReviewDto, ClaimsPrincipal User) : IRequest<ReviewDto>;
 }
