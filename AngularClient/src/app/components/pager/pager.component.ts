@@ -9,7 +9,7 @@ export class PagerComponent {
     @Input() pageSize?: number;
     @Output() pageChanged = new EventEmitter<number>();
   
-    onPagerChanged(event: any) {
+    onPagerChanged(event: any): void {
       this.pageChanged.emit(event.page);
     }
 }

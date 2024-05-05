@@ -14,7 +14,7 @@ builder.Services.AddSwaggerDocumentation();
 var app = builder.Build();
 
 // Migrate databases
-await app.MigrateDatabaseAsync<DataContext>();
+await app.MigrateDatabaseAsync();
 
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();

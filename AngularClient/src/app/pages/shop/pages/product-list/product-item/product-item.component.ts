@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '@app/models';
 import { CartService } from '@app/pages/cart/cart.service';
+import { environment } from '@src/environments/environment';
 
 @Component({
     selector: 'app-product-item',
@@ -9,10 +10,11 @@ import { CartService } from '@app/pages/cart/cart.service';
 })
 export class ProductItemComponent {
     @Input() product!: Product;
+    baseUrl = environment.baseUrl;
 
     constructor(private readonly cartService: CartService) {}
 
-    addItemToCart() {
+    addItemToCart(): void {
         this.product && this.cartService.addItemToCart(this.product);
     }
 }

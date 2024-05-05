@@ -11,7 +11,7 @@ import { CartService } from '@app/pages/cart/cart.service';
 export class NavBarComponent {
     constructor(public readonly cartService: CartService, public readonly accountService: AccountService) { }
 
-    getCartItemsCount(items: CartItem[]) {
+    getCartItemsCount(items: CartItem[]): number {
         return items.reduce((sum, item) => sum + item.quantity, 0);
     }
 }

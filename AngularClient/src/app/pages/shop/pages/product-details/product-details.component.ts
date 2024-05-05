@@ -4,6 +4,7 @@ import { ShopService } from '../../shop.service';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '@app/pages/cart/cart.service';
 import { take } from 'rxjs';
+import { environment } from '@src/environments/environment';
 
 @Component({
     selector: 'app-product-details',
@@ -12,6 +13,7 @@ import { take } from 'rxjs';
 })
 export class ProductDetailsComponent implements OnInit {
     product!: Product;
+    baseUrl = environment.baseUrl;
     quantity = 1;
     quantityInCart = 0;
 
@@ -19,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
         private readonly cartService: CartService,
         private readonly shopService: ShopService,
         private readonly activatedRoute: ActivatedRoute
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.getProduct();

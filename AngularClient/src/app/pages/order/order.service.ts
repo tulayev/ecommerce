@@ -6,14 +6,15 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class OrderService {
-    private baseUrl = environment.apiUrl;
+    private apiUrl = environment.apiUrl;
 
     constructor(private readonly httpClient: HttpClient) { }
   
     getOrdersForUser(): Observable<Order[]> {
-        return this.httpClient.get<Order[]>(`${this.baseUrl}/orders`);
+        return this.httpClient.get<Order[]>(`${this.apiUrl}/orders`);
     }
+    
     getOrderDetailed(id: number): Observable<Order> {
-        return this.httpClient.get<Order>(`${this.baseUrl}/orders/${id}`);
+        return this.httpClient.get<Order>(`${this.apiUrl}/orders/${id}`);
     }
 }

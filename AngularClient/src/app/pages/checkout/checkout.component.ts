@@ -32,7 +32,7 @@ export class CheckoutComponent implements OnInit {
         this.getAddressFormValues();
     }
   
-    getAddressFormValues() {
+    getAddressFormValues(): void {
         this.accountService.getUserAddress()
             .subscribe(address => address && this.checkoutFormGroup.get('addressFormGroup')?.patchValue(address));
     }

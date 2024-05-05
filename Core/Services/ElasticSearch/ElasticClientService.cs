@@ -17,12 +17,12 @@ namespace Core.Services.ElasticSearch
 
         private void AddDefaultMappings(ConnectionSettings settings)
         {
-            settings.DefaultMappingFor<ElasticProductDto>(x => x);
+            settings.DefaultMappingFor<ProductDto>(x => x);
         }
 
         private void CreateIndex(IElasticClient client, string indexName)
         {
-            client.Indices.Create(indexName, i => i.Map<ElasticProductDto>(
+            client.Indices.Create(indexName, i => i.Map<ProductDto>(
                 x => x.AutoMap()
                     .Properties(
                         p => p.Nested<ReviewDto>(c => c.Name(c => c.Reviews).AutoMap()

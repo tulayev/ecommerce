@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.CQRS.Product.Queries;
 using Core.Repositories;
+using Core.Services.ElasticSearch;
 using Entities.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +11,13 @@ namespace Core.CQRS.Product.Handlers
     public class GetProductsHandler : IRequestHandler<GetProductsQuery, IReadOnlyList<ProductDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IElasticClientService _client;
         private readonly IMapper _mapper;
 
-        public GetProductsHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetProductsHandler(IUnitOfWork unitOfWork, IElasticClientService client, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _client = client;
             _mapper = mapper;
         }
 
@@ -22,7 +25,6 @@ namespace Core.CQRS.Product.Handlers
         {
             var productsQueryable = _unitOfWork.GetQueryable<Entities.Product>()
                 .Where(x =>
-                    (string.IsNullOrWhiteSpace(request.QueryParams.Search) || x.Name.ToLower().Contains(request.QueryParams.Search)) &&
                     (!request.QueryParams.BrandId.HasValue || x.ProductBrandId == request.QueryParams.BrandId) &&
                     (!request.QueryParams.TypeId.HasValue || x.ProductTypeId == request.QueryParams.TypeId))
                 .Include(x => x.ProductType)
@@ -39,6 +41,12 @@ namespace Core.CQRS.Product.Handlers
                     "priceDesc" => productsQueryable.OrderByDescending(x => x.Price),
                     _ => productsQueryable.OrderBy(x => x.Name),
                 };
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.QueryParams.Search))
+            {
+                var results = await _client.SearchAsync<ProductDto>(request.QueryParams.Search);
+                return results.Documents.ToList();
             }
 
             var products = await productsQueryable.ToListAsync();

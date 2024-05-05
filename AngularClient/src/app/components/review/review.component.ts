@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Review } from '@app/models';
 import { ReviewService } from './review.service';
@@ -8,15 +8,20 @@ import { ToastrService } from 'ngx-toastr';
     selector: 'app-review',
     templateUrl: './review.component.html'
 })
-export class ReviewComponent {
+export class ReviewComponent implements OnInit {
     @Input() reviews!: Review[];
     @Input() productId!: number;
+    @Output() reload = new EventEmitter<void>();
     
-    reviewFormGroup = new FormGroup({
-        body: new FormControl('', Validators.required)
-    });
+    reviewFormGroup!: FormGroup;
 
     constructor(private readonly reviewService: ReviewService, private readonly toastr: ToastrService) { }
+
+    ngOnInit(): void {
+        this.reviewFormGroup = new FormGroup({
+            body: new FormControl('', Validators.required)
+        });
+    }
 
     onSubmit(): void {
         const model = {
@@ -25,9 +30,12 @@ export class ReviewComponent {
         };
         
         this.reviewService.postReview(model)
-            .subscribe(response => {
+            .subscribe(() => {
                 this.toastr.success('Отзыв опубликован');
-                console.log(response);
+                this.reviewFormGroup.patchValue({
+                    body: ''
+                });
+                this.reload.emit();
             });
     }
 }

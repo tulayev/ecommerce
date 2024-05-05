@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartItem } from '@app/models';
 import { CartService } from '@app/pages/cart/cart.service';
+import { environment } from '@src/environments/environment';
 
 @Component({
     selector: 'app-cart-summary',
@@ -10,6 +11,7 @@ export class CartSummaryComponent {
     @Output() addItem = new EventEmitter<CartItem>();
     @Output() removeItem = new EventEmitter<{id: number, quantity: number}>();
     @Input() isCart = true;
+    baseUrl = environment.baseUrl;
   
     constructor(public readonly cartService: CartService) { }
   

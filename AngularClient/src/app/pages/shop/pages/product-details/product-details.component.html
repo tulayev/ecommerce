@@ -4,7 +4,7 @@
 >
     <div class="col-6">
         <img 
-            src="{{ product.pictureUrl }}" 
+            src="{{ baseUrl }}/{{ product.pictureUrl }}" 
             alt="{{ product.name }}" 
             class="w-100"
         />
@@ -48,5 +48,6 @@
     <app-review 
         [reviews]="product.reviews"
         [productId]="product.id"
+        (reload)="getProduct()"
     ></app-review>
 </div>

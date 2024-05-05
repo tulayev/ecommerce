@@ -24,7 +24,7 @@ export class RegisterComponent {
         password: ['', [Validators.required, Validators.pattern(regex.complexPassword)]],
     });  
 
-    onSubmit() {
+    onSubmit(): void {
         this.accountService.register(this.registerForm.value).subscribe({
             next: () => this.router.navigateByUrl('/shop'),
             error: error => this.errors = error.errors

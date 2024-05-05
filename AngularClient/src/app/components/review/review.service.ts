@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ReviewService {
-    private baseUrl = environment.apiUrl;
+    private apiUrl = environment.apiUrl;
 
     constructor(private readonly httpClient: HttpClient) { }
 
     postReview(model: any): Observable<Review> {
-        return this.httpClient.post<Review>(`${this.baseUrl}/reviews`, model);
+        return this.httpClient.post<Review>(`${this.apiUrl}/reviews`, model);
     }
 }

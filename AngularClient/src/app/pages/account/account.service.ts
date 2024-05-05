@@ -9,7 +9,7 @@ import { Observable, ReplaySubject, map, of } from 'rxjs';
     providedIn: 'root'
 })
 export class AccountService {
-    private baseUrl = environment.apiUrl;
+    private apiUrl = environment.apiUrl;
     private currentUserSource = new ReplaySubject<User | null>(1);
     currentUser$ = this.currentUserSource.asObservable();
 
@@ -24,7 +24,7 @@ export class AccountService {
         let headers = new HttpHeaders();
         headers = headers.set('Authorization', `Bearer ${token}`);
 
-        return this.httpClient.get<User>(`${this.baseUrl}/account`, { headers }).pipe(
+        return this.httpClient.get<User>(`${this.apiUrl}/account`, { headers }).pipe(
             map(user => {
                 if (user) {
                     localStorage.setItem('token', user.token);
@@ -39,7 +39,7 @@ export class AccountService {
     }
 
     login(values: any): Observable<void> {
-        return this.httpClient.post<User>(`${this.baseUrl}/account/login`, values).pipe(
+        return this.httpClient.post<User>(`${this.apiUrl}/account/login`, values).pipe(
             map(user => {
                 localStorage.setItem('token', user.token);
                 this.currentUserSource.next(user);
@@ -48,7 +48,7 @@ export class AccountService {
     }
 
     register(values: any): Observable<void> {
-        return this.httpClient.post<User>(`${this.baseUrl}/account/register`, values).pipe(
+        return this.httpClient.post<User>(`${this.apiUrl}/account/register`, values).pipe(
             map(user => {
                 localStorage.setItem('token', user.token);
                 this.currentUserSource.next(user);
@@ -63,14 +63,14 @@ export class AccountService {
     }
 
     checkEmailExists(email: string): Observable<boolean> {
-        return this.httpClient.get<boolean>(`${this.baseUrl}/account/emailExists?email=${email}`);
+        return this.httpClient.get<boolean>(`${this.apiUrl}/account/emailExists?email=${email}`);
     }
 
     getUserAddress(): Observable<Address> {
-        return this.httpClient.get<Address>(`${this.baseUrl}/account/address`);
+        return this.httpClient.get<Address>(`${this.apiUrl}/account/address`);
     }
     
     updateUserAddress(address: Address): Observable<Address> {
-        return this.httpClient.put<Address>(`${this.baseUrl}/account/address`, address);
+        return this.httpClient.put<Address>(`${this.apiUrl}/account/address`, address);
     }
 }

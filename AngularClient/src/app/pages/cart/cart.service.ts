@@ -8,7 +8,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
     providedIn: 'root'
 })
 export class CartService {
-    private baseUrl = environment.apiUrl;
+    private apiUrl = environment.apiUrl;
     private cartSource = new BehaviorSubject<Cart | null>(null);
     private cartTotalSource = new BehaviorSubject<CartTotals | null>(null);
     
@@ -68,7 +68,7 @@ export class CartService {
     }
 
     private deleteCart(cart: Cart): Subscription {
-        return this.httpClient.delete(`${this.baseUrl}/cart?id=${cart.id}`)
+        return this.httpClient.delete(`${this.apiUrl}/cart?id=${cart.id}`)
             .subscribe(() => this.deleteLocalCart());
     }
 
@@ -84,7 +84,7 @@ export class CartService {
     }
 
     getCart(id: string): Subscription {
-        return this.httpClient.get<Cart>(`${this.baseUrl}/cart?id=${id}`)
+        return this.httpClient.get<Cart>(`${this.apiUrl}/cart?id=${id}`)
             .subscribe(cart => {
                 this.cartSource.next(cart);
                 this.calculateTotals();
@@ -92,7 +92,7 @@ export class CartService {
     }
     
     setCart(cart: Cart):Subscription {
-        return this.httpClient.post<Cart>(`${this.baseUrl}/cart`, cart)
+        return this.httpClient.post<Cart>(`${this.apiUrl}/cart`, cart)
             .subscribe(cart => {
                 this.cartSource.next(cart);
                 this.calculateTotals();

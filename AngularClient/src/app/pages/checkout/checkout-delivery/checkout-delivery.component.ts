@@ -19,7 +19,7 @@ export class CheckoutDeliveryComponent {
             .subscribe(dm => this.deliveryMethods = dm);
     }
   
-    setShippingPrice(deliveryMethod: DeliveryMethod) {
+    setShippingPrice(deliveryMethod: DeliveryMethod): void {
         this.cartService.setShippingPrice(deliveryMethod);
     }
 }

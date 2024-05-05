@@ -34,17 +34,12 @@ namespace Core.CQRS.Review.Handlers
                 .Include(x => x.Reviews)
                 .FirstOrDefaultAsync(x => x.Id == productId);
 
-            var elasticItem = new ElasticProductDto
-            {
-                Id = product.Id,
-                Product = _mapper.Map<ProductDto>(product),
-                Reviews = _mapper.Map<IReadOnlyList<ReviewDto>>(product.Reviews)
-            };
+            var elasticItem = _mapper.Map<ProductDto>(product);
 
-            var documentExists = await _client.DocumentExistsAsync<ElasticProductDto>(product.Id);
+            var documentExists = await _client.DocumentExistsAsync<ProductDto>(product.Id);
 
             if (documentExists.Exists)
-                await _client.RemoveFromElasticIndexAsync<ElasticProductDto>(product.Id);
+                await _client.RemoveFromElasticIndexAsync<ProductDto>(product.Id);
             
             await _client.AddToElasticIndexAsync(elasticItem);
         }

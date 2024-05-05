@@ -4,7 +4,7 @@ import { CartService } from '@app/pages/cart/cart.service';
 import { CheckoutService } from '../checkout.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Address, Cart } from '@app/models';
+import { Address, Cart, OrderToCreate } from '@app/models';
 
 @Component({
     selector: 'app-checkout-payment',
@@ -20,7 +20,7 @@ export class CheckoutPaymentComponent {
         private readonly router: Router
     ) { }
   
-    private getOrderToCreate(cart: Cart) {
+    private getOrderToCreate(cart: Cart): OrderToCreate | void {
         const deliveryMethodId = this.checkoutFormGroup?.get('deliveryFormGroup')?.get('deliveryMethod')?.value;
         const shipToAddress = this.checkoutFormGroup?.get('addressFormGroup')?.value as Address;
 
@@ -37,7 +37,7 @@ export class CheckoutPaymentComponent {
         }
     }
 
-    submitOrder() {
+    submitOrder(): void {
         const cart = this.cartService.getCurrentCartValue();
         
         if (!cart) 

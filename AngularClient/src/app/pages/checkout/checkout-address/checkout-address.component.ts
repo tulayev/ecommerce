@@ -12,7 +12,7 @@ export class CheckoutAddressComponent {
 
     constructor(private readonly accountService: AccountService, private readonly toastr: ToastrService) { }
   
-    saveUserAddress() {
+    saveUserAddress(): void {
         this.accountService.updateUserAddress(this.checkoutFormGroup?.get('addressFormGroup')?.value)
             .subscribe(() => {
                 this.toastr.success('Адрес сохранён');
