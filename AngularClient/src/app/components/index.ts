@@ -1,4 +1,5 @@
 export * from './nav-bar/nav-bar.module';
+export * from './dashboard-sidebar/dashboard-sidebar.module';
 export * from './pager/pager.module';
 export * from './paging-header/paging-header.module';
 export * from './order-totals/order-totals.module';

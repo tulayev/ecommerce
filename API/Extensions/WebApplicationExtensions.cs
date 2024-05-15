@@ -20,13 +20,14 @@ namespace API.Extensions
                 {
                     var db = services.GetRequiredService<DataContext>();
                     var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     var client = services.GetRequiredService<IElasticClientService>();
                     var mapper = services.GetRequiredService<IMapper>();
                     // Migrate the db
                     await db.Database.MigrateAsync();
                     // Seed data
                     await DataContextSeed.SeedAsync(db);
-                    await DataContextSeed.SeedUsersAsync(userManager);
+                    await DataContextSeed.SeedUsersAsync(userManager, roleManager);
                     // Seed elasticsearch data
                     var data = db.Products
                         .Include(x => x.ProductBrand)

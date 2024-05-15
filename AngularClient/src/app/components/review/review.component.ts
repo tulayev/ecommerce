@@ -23,7 +23,7 @@ export class ReviewComponent implements OnInit {
         });
     }
 
-    onSubmit(): void {
+    onSave(): void {
         const model = {
             productId: this.productId,
             body: this.reviewFormGroup.controls['body'].value

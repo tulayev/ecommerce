@@ -1,5 +1,6 @@
 ﻿using Core.CQRS.Identity.Commands;
 using Core.Services.Token;
+using Data;
 using Entities;
 using Entities.DTOs;
 using MediatR;
@@ -10,13 +11,11 @@ namespace Core.CQRS.Identity.Handlers
     public class RegisterHandler : IRequestHandler<RegisterCommand, UserDto>
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
 
-        public RegisterHandler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
+        public RegisterHandler(UserManager<AppUser> userManager, ITokenService tokenService)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _tokenService = tokenService;
         }
 
@@ -30,6 +29,7 @@ namespace Core.CQRS.Identity.Handlers
             };
 
             var result = await _userManager.CreateAsync(user, command.RegisterDto.Password);
+            await _userManager.AddToRoleAsync(user, Constants.UserRole);
 
             if (!result.Succeeded) 
                 return null;
@@ -37,7 +37,7 @@ namespace Core.CQRS.Identity.Handlers
             return new UserDto
             {
                 DisplayName = user.DisplayName,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 Email = user.Email
             };
         }

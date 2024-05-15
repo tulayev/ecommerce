@@ -23,7 +23,6 @@
                 </div>
                 <form 
                     [formGroup]="reviewFormGroup" 
-                    (ngSubmit)="onSubmit()" 
                     class="card-footer py-3 border-0" 
                     style="background-color: #f8f9fa;"
                 >
@@ -49,7 +48,7 @@
                     <div class="float-end mt-2 pt-1">
                         <button 
                             [disabled]="reviewFormGroup.invalid"
-                            type="submit" 
+                            (click)="onSave()" 
                             data-mdb-button-init data-mdb-ripple-init 
                             class="btn btn-primary btn-sm"
                         >

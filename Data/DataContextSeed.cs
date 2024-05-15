@@ -47,10 +47,21 @@ namespace Data
             }
         }
 
-        public static async Task SeedUsersAsync(UserManager<AppUser> userManager)
+        public static async Task SeedUsersAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (!userManager.Users.Any())
             {
+                var roles = new IdentityRole[]
+                {
+                    new() { Name = Constants.AdminRole },
+                    new() { Name = Constants.UserRole }
+                };
+
+                foreach (var role in roles)
+                {
+                    await roleManager.CreateAsync(role);
+                }
+
                 var user = new AppUser
                 {
                     DisplayName = "Артём",
@@ -68,6 +79,7 @@ namespace Data
                 };
 
                 await userManager.CreateAsync(user, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(user, Constants.AdminRole);
             }
         }
     }

@@ -7,6 +7,7 @@ import { OrderTotalsModule } from './order-totals/order-totals.module';
 import { StepperModule } from './stepper/stepper.module';
 import { CartSummaryModule } from './cart-summary/cart-summary.module';
 import { ReviewModule } from './review/review.module';
+import { DashboardModule } from '@app/pages/dashboard/dashboard.module';
 
 
 
@@ -14,6 +15,7 @@ import { ReviewModule } from './review/review.module';
     declarations: [],
     imports: [
         CommonModule,
+        DashboardModule,
         NavBarModule,
         PagerModule,
         PagingHeaderModule,
@@ -24,6 +26,7 @@ import { ReviewModule } from './review/review.module';
     ], 
     exports: [
         NavBarModule,
+        DashboardModule,
         PagerModule,
         PagingHeaderModule,
         OrderTotalsModule,

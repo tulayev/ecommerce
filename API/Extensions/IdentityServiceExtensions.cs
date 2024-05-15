@@ -20,8 +20,10 @@ namespace API.Extensions
             services.AddIdentityCore<AppUser>(opt =>
             {
             })
-            .AddEntityFrameworkStores<DataContext>()
-            .AddSignInManager<SignInManager<AppUser>>();
+            .AddSignInManager<SignInManager<AppUser>>()
+            .AddRoles<IdentityRole>()
+            .AddRoleManager<RoleManager<IdentityRole>>()
+            .AddEntityFrameworkStores<DataContext>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -36,7 +38,10 @@ namespace API.Extensions
                     };
                 });
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Constants.AdminPolicy, policy => policy.RequireRole(Constants.AdminRole));
+            });
 
             return services;
         }
