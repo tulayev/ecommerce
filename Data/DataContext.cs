@@ -15,6 +15,7 @@ namespace Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

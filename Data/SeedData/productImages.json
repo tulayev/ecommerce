@@ -1,0 +1,52 @@
+[
+  {
+    "ProductId": 1,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800354/monitor_samsung_1_vfp9zc.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 2,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800642/monitor_samsung_2_h8yiaa.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 3,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800780/monitor_samsung_3_qfxfok.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 4,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800344/monitor_aoc_1_vpsrqb.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 5,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800842/ram_kingston_1_celdzz.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 6,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800873/ram_corsair_1_gv7o3i.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 7,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800930/psu_zalman_1_prqsp4.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 8,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800954/psu_zalman_2_pqtk7a.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 9,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800977/ssd_samsung_1_pqut7r.jpg",
+    "PublicId": ""
+  },
+  {
+    "ProductId": 10,
+    "Url": "https://res.cloudinary.com/dsiwchhma/image/upload/v1715800996/ssd_kingston_1_yrnniq.jpg",
+    "PublicId": ""
+  }
+]

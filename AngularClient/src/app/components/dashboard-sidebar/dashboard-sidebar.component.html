@@ -1,36 +1,16 @@
 <div 
     class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" 
-    style="width: 280px; height: 100vh;"
+    style="width: 280px; height: 100%;"
 >
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
             <a 
-                routerLink="/dashboard"
+                routerLink="/dashboard/products"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 class="nav-link text-white"
             >
                 Продукты
-            </a>
-        </li>
-        <li class="nav-item">
-            <a 
-                routerLink="/dashboard/product-brands"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="nav-link text-white"
-            >
-                Бренды
-            </a>
-        </li>
-        <li class="nav-item">
-            <a 
-                routerLink="dashboard/product-types"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="nav-link text-white"
-            >
-                Типы
             </a>
         </li>
     </ul>

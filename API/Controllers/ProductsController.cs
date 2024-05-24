@@ -4,7 +4,7 @@ using Core.CQRS.ProductBrand.Queries;
 using Core.CQRS.ProductType.Queries;
 using Core.Helpers;
 using Entities;
-using Entities.DTOs;
+using Entities.DTOs.Product;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

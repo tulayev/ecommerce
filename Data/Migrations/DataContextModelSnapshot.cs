@@ -209,6 +209,31 @@ namespace Data.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("Entities.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -226,10 +251,6 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
-
-                    b.Property<string>("PictureUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -528,6 +549,17 @@ namespace Data.Migrations
                     b.Navigation("ItemOrdered");
                 });
 
+            modelBuilder.Entity("Entities.Photo", b =>
+                {
+                    b.HasOne("Entities.Product", "Product")
+                        .WithOne("Photo")
+                        .HasForeignKey("Entities.Photo", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Entities.Product", b =>
                 {
                     b.HasOne("Entities.ProductBrand", "ProductBrand")
@@ -627,6 +659,8 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Entities.Product", b =>
                 {
+                    b.Navigation("Photo");
+
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

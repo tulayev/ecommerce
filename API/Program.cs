@@ -25,8 +25,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerDocumentation();
 }
 
-app.UseStaticFiles();
-
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();

@@ -5,6 +5,7 @@ using Core.Repositories;
 using Core.Services.ElasticSearch;
 using Entities;
 using Entities.DTOs;
+using Entities.DTOs.Product;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,7 @@ namespace Core.CQRS.Review.Handlers
                 .Include(x => x.ProductBrand)
                 .Include(x => x.ProductType)
                 .Include(x => x.Reviews)
+                .Include(x => x.Photo)
                 .FirstOrDefaultAsync(x => x.Id == productId);
 
             var elasticItem = _mapper.Map<ProductDto>(product);

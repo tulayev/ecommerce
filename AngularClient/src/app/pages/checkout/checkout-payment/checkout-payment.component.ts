@@ -23,9 +23,6 @@ export class CheckoutPaymentComponent {
     private getOrderToCreate(cart: Cart): OrderToCreate | void {
         const deliveryMethodId = this.checkoutFormGroup?.get('deliveryFormGroup')?.get('deliveryMethod')?.value;
         const shipToAddress = this.checkoutFormGroup?.get('addressFormGroup')?.value as Address;
-
-        console.log(deliveryMethodId);
-        console.log(shipToAddress);
         
         if (!deliveryMethodId || !shipToAddress) 
             return;

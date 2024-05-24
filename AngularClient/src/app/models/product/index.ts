@@ -1,4 +1,4 @@
-import { Review } from "../review";
+import { Review } from '../review';
 
 export interface Product {
     id: number;

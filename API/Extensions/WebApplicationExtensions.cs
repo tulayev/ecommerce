@@ -2,7 +2,7 @@
 using Core.Services.ElasticSearch;
 using Data;
 using Entities;
-using Entities.DTOs;
+using Entities.DTOs.Product;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +33,7 @@ namespace API.Extensions
                         .Include(x => x.ProductBrand)
                         .Include(x => x.ProductType)
                         .Include(x => x.Reviews)
+                        .Include(x => x.Photo)
                         .ToList();
 
                     var products = mapper.Map<List<ProductDto>>(data);

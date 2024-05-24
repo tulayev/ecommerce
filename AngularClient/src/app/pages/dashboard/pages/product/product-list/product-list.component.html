@@ -1,0 +1,50 @@
+<div class="d-flex">
+    <app-dashboard-sidebar></app-dashboard-sidebar>
+    <div class="mx-2">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="text-uppercase">
+                    <tr>
+                        <th>
+                            <div class="py-2">Продукт</div>
+                        </th>
+                        <th>
+                            <div class="py-2">Цена</div>
+                        </th>
+                        <th>
+                            <div class="py-2">Действия</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products$ | async">
+                        <th>
+                            <div class="p-2 d-inline-block">
+                                <img 
+                                    src="{{ product.pictureUrl }}" 
+                                    alt="{{ product.name }}" 
+                                    class="img-fluid"
+                                    style="max-height: 50px;"
+                                />
+                                <div class="ms-3 d-inline-block align-middle">
+                                    <h5 class="mb-0">
+                                        {{ product.name }}
+                                    </h5>
+                                </div>
+                            </div>
+                        </th>
+                        <td class="align-middle">
+                            <strong>{{ product.price | currency }}</strong>
+                        </td>
+                        <td class="align-middle">
+                            <div class="py-2 flex">
+                                <button class="btn btn-success">Изменить</button>
+                                <button (click)="deleteProduct(product.id)" class="btn btn-danger">Удалить</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

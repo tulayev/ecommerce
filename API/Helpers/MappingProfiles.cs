@@ -2,6 +2,7 @@
 using Entities;
 using Entities.DTOs;
 using Entities.DTOs.Orders;
+using Entities.DTOs.Product;
 using Entities.Orders;
 
 namespace API.Helpers
@@ -13,7 +14,7 @@ namespace API.Helpers
             CreateMap<Product, ProductDto>()
                 .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
                 .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name))
-                .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.PictureUrl));
+                .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photo.Url));
             
             CreateMap<Entities.Address, AddressDto>().ReverseMap();
 

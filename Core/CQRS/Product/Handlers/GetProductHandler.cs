@@ -2,7 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using Core.CQRS.Product.Queries;
 using Core.Repositories;
-using Entities.DTOs;
+using Entities.DTOs.Product;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

@@ -4,7 +4,6 @@ import { ShopService } from '../../shop.service';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '@app/pages/cart/cart.service';
 import { take } from 'rxjs';
-import { environment } from '@src/environments/environment';
 
 @Component({
     selector: 'app-product-details',
@@ -13,7 +12,6 @@ import { environment } from '@src/environments/environment';
 })
 export class ProductDetailsComponent implements OnInit {
     product!: Product;
-    baseUrl = environment.baseUrl;
     quantity = 1;
     quantityInCart = 0;
 

@@ -2,7 +2,7 @@
 using Core.CQRS.Product.Queries;
 using Core.Repositories;
 using Core.Services.ElasticSearch;
-using Entities.DTOs;
+using Entities.DTOs.Product;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,12 +23,23 @@ namespace Core.CQRS.Product.Handlers
 
         public async Task<IReadOnlyList<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
+            if (request.QueryParams is null)
+            {
+                var allProducts = await _unitOfWork.GetQueryable<Entities.Product>()
+                    .Include(x => x.ProductType)
+                    .Include(x => x.ProductBrand)
+                    .Include(x => x.Photo)
+                    .ToListAsync();
+                return _mapper.Map<IReadOnlyList<Entities.Product>, IReadOnlyList<ProductDto>>(allProducts);
+            }
+
             var productsQueryable = _unitOfWork.GetQueryable<Entities.Product>()
                 .Where(x =>
                     (!request.QueryParams.BrandId.HasValue || x.ProductBrandId == request.QueryParams.BrandId) &&
                     (!request.QueryParams.TypeId.HasValue || x.ProductTypeId == request.QueryParams.TypeId))
                 .Include(x => x.ProductType)
                 .Include(x => x.ProductBrand)
+                .Include(x => x.Photo)
                 .Skip(request.QueryParams.PageSize * (request.QueryParams.PageNumber - 1))
                 .Take(request.QueryParams.PageSize)
                 .OrderBy(x => x.Name);

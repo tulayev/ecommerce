@@ -2,6 +2,7 @@
 using Core.CQRS.Product.Handlers;
 using Core.Repositories;
 using Core.Services.ElasticSearch;
+using Core.Services.ImageUpload;
 using Core.Services.Order;
 using Core.Services.Token;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace API.Extensions
     {
         public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration config)
         {
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
                 var options = ConfigurationOptions.Parse(config.GetConnectionString("Redis"));
@@ -23,6 +25,7 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IElasticClientService, ElasticClientService>();
+            services.AddSingleton<IImageService, ImageService>();
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(GetProductsHandler).Assembly));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<ApiBehaviorOptions>(options =>

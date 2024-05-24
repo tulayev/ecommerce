@@ -33,6 +33,13 @@ namespace Data
                 var items = JsonSerializer.Deserialize<List<Product>>(data);
                 context.Products.AddRange(items);
             }
+            
+            if (!context.Photos.Any())
+            {
+                var data = File.ReadAllText($"{SeedDataBasePath}/productImages.json");
+                var items = JsonSerializer.Deserialize<List<Photo>>(data);
+                context.Photos.AddRange(items);
+            }
 
             if (!context.DeliveryMethods.Any())
             {
